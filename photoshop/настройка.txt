@@ -1,0 +1,65 @@
+оставл€ем только вкладки "character", "layers", "history";
+
+edit - color settings - working spaces - мен€ем rgb на srgb;
+
+ставим светлый интерфейс;
+
+preferences - units & rulers - units = px;
+
+ctrl + 1, ctrl + 0, alt + scroll, space + mouse move, ctrl + ;, ctrl + h, ctrl + r, view - show, f12, ctrl + alt + shift + s, ctrl + n;
+дл€ папок в layers режим наложени€ всегда должен быть passthrough, дл€ слоев normal;
+
+клик
+ по глазу напротив папки или сло€ + alt скрывает все остальные папки и слои;
+
+можно посмотреть данные о градиенте, посмотрев  свойство эффекта gradient overlay. не сработает, если режим наложени€ не normal. в этом случае узнаем данные градиента пипеткой - начальный и конечный цвет;
+
+сохранение графики:
+выбираем нужный слой или группу слоев. нажимаем на них пкм - duplicate layers - document - new;
+image - trim - based on - transparent pixels;
+ctrl + alt + shift + s;
+
+
+картинки называем с префиксами - icon, bg, form, button, sprite - суть картинки (form-radio.png, form-radio-checked.png);
+
+actions:
+window - actions
+- скрыть список default actions
+- create new set с именем "my action"
+- выбираем любой слой
+- actions - create new action
+- name = export for web
+- function key = f2 - record
+- пкм по выделенному слою - duplicate layer
+- destination - document = new - ok
+- image - trim
+- save for web в любое место с любым именем
+- закрыть файл без сохранени€
+- оставить запись action
+- р€дом с пунктом export - toggle dialog on
+- выбираем любой слой и нажимаем f2
+
+экспорт мелкой графики с помощью макетного ножа:
+легко экспортировать области одинаковых размеров;
+slice tool - выделить в макете несколько областей;
+2xлкм по номеру области, задаем им€ - ок;
+slice select tool, чтобы редактировать размеры области.;
+save - slices - all user slices;
+ctrl + alt + shift + s - дл€ каждой области можно задать свой формат, а можно выбрать все свои слои и настроить адинаково;
+view - show - slices - скрыть.
+
+экспорт текстур:
+способ 1 (дл€ €вно повтор€ющихс€ паттернов):
+layer - flatten image - ok;
+croptool - подрежем нужный фрагмент - enter - экспорт. в конце нажимаем f12;
+способ 2:
+move tool - выбрать слой, содержащий текстуру;
+2xлкм по миниатюре сло€ с текстурой;
+наведем курсор на текстуру и увидим подсказку с размером;
+сохраним текстуру в свой фотошоп new pattern;
+создать новый документ с размерами текстуры - layer - new fill layer - pattern - ok;
+выбираем нужную текстуру - экспорт (шум);
+если текстуры в растровом слое, то инструментом croptool выдел€ем квадратный фрагмент от 50px до 100px по стороне и экспортируем.
+
+
+

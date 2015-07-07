@@ -1,0 +1,64 @@
+/* Write your SCSS code below. */
+@mixin cars($make, $color) {
+  .#{$make} {
+    border: 1px solid black;
+    background-image: url("#{$color}.png")
+  }
+}
+
+$time: morning;
+a {
+  @if $time == morning {
+    color: red;
+  } @else if $time == afternoon {
+     color: blue;
+  } @else {
+    color: gray;
+  }
+}
+
+@for $i from 1 through 3 {
+  .item_#{$i} {
+    width: $i * 100px;
+  }
+}
+
+@each $color in red, blue, green {
+  .#{$color}_box {
+    background-color: $color;
+  }
+}
+
+@mixin square($size, $color: black) {
+  width: $size;
+  height: $size;
+  border: 1px solid $color;
+}
+
+.box {
+  @include square($color: red, $size: 10px);
+}
+
+@mixin rainbow($colors...) {
+  @each $color in $colors {
+    .#{$color} {
+      background: $color;
+    }
+  }
+}
+
+@include rainbow(red, orange, yellow, green);
+
+
+%btn-base { 
+  padding: em(10px); 
+  color: $white; 
+  font-size: em(14px); 
+}
+
+.btn { 
+  &--submit {
+    @extend %btn-base; 
+    background: $teal; 
+  } 
+}

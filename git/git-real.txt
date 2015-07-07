@@ -1,0 +1,268 @@
+GIT REAL
+
+Welcome to your first day at Example Labs! They use Git for version control, and there's a little configuration to be done before you start. You can't quite recall what parameters the config command takes, though. Run the git command which will bring up the help page for config.
+$ git help config
+
+WHO ARE YOU?
+Before you start working with Git, you need to set up your name to include with commit messages. Use git config to set your user name (could be anything), across all repos on this machine.
+$ git config --global user.name "Dima"
+
+START REPO
+You've begun working on the project, so it's time to setup version control. Set up a new Git repo within the current directory.
+$ git init
+
+WHAT'S MODIFIED?
+Okay, you've created a couple files but you can't remember which needed committing. Use the Git command which will show the state of your files.
+$ git status
+
+STAGE FILES
+Ah, there's your file. It's never been committed before, so add it to the staging area.
+$ git add index.html
+
+COMMIT FILES
+Now add your staged changes to the Git repo by committing them.
+$ git commit -m "Adding changes"
+
+STAGE MANY FILES
+You've made a subdirectory for stylesheets, but nothing's committed yet. Add all files in the css/ directory to the stage.
+$ git add css/
+
+SHOW COMMITS
+Your co-worker stops by, and asks what you've gotten committed. Bring up the commit history to show him.
+$ git log
+
+UNSTAGED DIFFERENCES
+A new file has been added to the site. Run the command to see what all has changed since your last commit.
+$ git diff
+
+STAGE NEW FILE
+There it is: ostrich.html. Stage it to be committed.
+$ git add ostrich.html
+
+STAGED DIFFERENCES
+We've added ostrich.html to the staging area, but your co-worker has stopped by and asked to see the new page first. Run a diff on the staged changes.
+$ git diff --staged
+
+UNSTAGE FILES
+"Wait," says the co-worker. "They didn't tell you? The client "wants the ostrich section pulled - they couldn't get a license to "sell them." Better unstage ostrich.html.
+$ git reset HEAD ostrich.html
+
+SKIP STAGING
+We've modified the index.html file, adding a link to the cats section. Since that file is already tracked, you can just skip staging and commit it with one command.
+$ git commit -am "New commit" или $ git commit -a -m "New commit"
+
+ADD TO COMMIT I
+Whoops! We forgot to add the cats.html page that index.html links to, and it should really be amended on the same commit. To do this, let's first stage cats.html.
+$ git add cats.html
+
+ADD TO COMMIT II
+Second, let's add cats.html to the prior commit and change the commit message in one step.
+$ git commit --amend -m "change files"
+
+ROLL BACK COMMIT
+Wait, you're getting word that the cats section might be cancelled. Undo the commit, and put the files back in staging.
+$ git reset --soft HEAD^ cat.html
+
+DISCARD CHANGES
+Forget the whole thing - the client's license to sell cats is suspended during some kind of "investigation". Discard your changes to cats.html and index.html.
+$ git checkout -- cats.html index.html
+
+REMOVE COMMIT I
+The next feature is a banner on the main page, saying the pet shop will soon be offering badgers. Add and commit index.html in one step, skipping the staging area.
+$ git commit -am "add modified"
+
+REMOVE COMMIT II
+Your co-worker is back, looking sheepish. "Never mind the badgers ad. The client's legal department said that was a liability risk." You'll need to remove the most recent commit, and all its changes.
+$ git reset --hard HEAD^
+
+NEW REMOTE REPOS
+Oh well, at least you have the site started. Your Example Labs co-worker got you the remote address for the shared repo: git@example.com:example/petshop.git. Add that address as the origin repo.
+$ git remote add origin git@example.com:example/petshop.git
+
+PUSH TO A REMOTE
+Done for the day! Send your committed work to "origin". Make sure you use the -u option so origin will be the default destination in the future.
+$ git push -u origin master
+
+CLONE A REPO
+The IT department installed an OS update on your workstation - and wiped the hard drive in the process. Clone the Pet Shop repo from git@example.com:example/petshop.git so you can resume work.
+$ git clone git@example.com:example/petshop.git
+
+LIST REMOTES
+Our repo is cloned locally, but how do we check to a list of our remotes? Lets get a list of all our remotes with a verbose output.
+$ git remote -v
+
+CREATE A BRANCH
+We need to add a section for the pet grooming salon on the site. You want to isolate this new feature from your other work. Create a new branch named grooming.
+$ git branch grooming
+
+SWITCH TO BRANCH
+You've made the new branch, but your commits are still going to the old one. Switch to the grooming branch.
+$ git checkout grooming
+
+COMBINE BRANCH I
+You've finished work on the grooming branch and are ready to bring your work back into master. First, check out the master branch...
+$ git checkout master
+
+COMBINE BRANCH II
+...Now bring your changes from the grooming branch into the ...master branch.
+$ git merge grooming
+
+BRANCH SHORTCUT
+The pet shop wants to try selling yet another product line! Let's do this one in a branch in case it gets cancelled like the others. Using a single command, create and check out an octopus branch.
+$ git checkout -b octopus
+
+SEND CHANGES
+You've committed some work so now it's time to share! Push it out for your co-workers to see.
+$ git push
+
+GET CHANGES
+Looks like your co-worker pushed some changes before you did! Your push was rejected. Retrieve the latest changes, and merge them into your branch in one step.
+$ git pull
+
+FIX CONFLICTS
+Git is reporting a conflict with your co-worker's changes in "index.html". Just discard his changes, and keep your own (the HEAD).
+Remove  all <<<<<, =====, >>>>> and resolving the conflict.
+
+MARK FIXED
+Mark the conflict in index.html as resolved.
+$ git add index.html
+
+COMMIT FIX
+Last, commit your merged changes. Don't forget to add a message so we know what the commit was about!
+$ git commit -m "Commit fix"
+
+PUSH BRANCH
+A new kind of pet is for sale at the store! Maybe this one will catch on with the public. You've committed your work to the local hamsters branch; now publish this branch in the origin repo.
+$ git push origin hamsters
+
+GET REMOTE BRANCH
+"git branch -r" does not query the remotes to check for new branches. In order to see a new remote branch you first have to do a fetch or a pull. So retrieve the remote "weasel" branch.
+$ git fetch
+
+REMOTE BRANCHES
+Your co-worker said he wants you to look over a new branch on "origin", but he didn't tell you its name. Get a list of remote branches.
+$ git branch -r
+
+DELETE ON REMOTE
+Guess how the product launch went with the weasels? Better delete the "weasel" branch on "origin".
+$ git push origin :weasel
+
+BRANCH STATUS
+Wait, did you already pull that branch locally? Check for stale branches that are tracking "origin".
+$ git remote show origin
+
+CLEAN BRANCHES
+You still have a stale local branch tracking the now-deleted origin/weasel. Clean up your local references.
+$ git remote prune origin
+
+LIST TAGS
+With the weasel threat eliminated, the pet store wants to deploy the site. Let's see, what was the previous version number? Display the tags to find out.
+$ git tag
+
+CREATE TAG
+Ah, yes, the last release was "v1.3.1". You've added the hamsters, so it would be best to release this as "v1.3.2". Create a tag accordingly.
+$ git tag -a v1.3.2 -m "version 1.3.2"
+
+SEND TAGS
+Push your tag to origin.
+$ git push --tags
+
+RETRIEVE TAG
+The client is requesting that you roll back to the prior release. (Seriously? What could have gone wrong with the hamsters?) Retrieve the release tagged "v1.3.1".
+$ git checkout v1.3.1
+
+REBASE I
+You've made some commits to a feature branch, but you've also committed a hotfix on master that would make a merge messy. Check out the kennel branch so you can rebase it on master.
+$ git checkout kennel
+
+REBASE II
+OK, you're on the kennel branch. Our goal is to be able to merge kennel back into master without conflicts or a merge commit. Rebase the current kennel branch on master.
+$ git rebase master
+
+REBASE III
+With the rebase complete, kennel should merge with master cleanly. Switch branches back to master.
+$ git checkout master
+
+REBASE IV
+We're on master, and we know the kennel will merge cleanly. Go ahead and merge in the kennel branch.
+$ git merge kennel
+
+REMOTE I
+Your co-worker has pushed changes to the master branch on the origin repo. Retrieve it without merging it so we can replay our work on top of it.
+$ git fetch
+
+REMOTE II
+Now that your local repo knows of the latest changes on origin/master, move your master commits after the commits from origin/master.
+$ git rebase origin/master
+
+CONFLICT I
+Your co-worker has pushed before you yet again. Better fetch the changes...
+$ git fetch
+
+CONFLICT II
+Now run another rebase to move your commit after the latest fetched one.
+$ git rebase
+
+CONFLICT III
+Uh, oh! Looks like the rebase is in conflict this time! Edit index.html to fix the conflicting lines. We want to keep our version with Cats and Dogs.
+$ Remove the lines containing the merge conflict, as well as the separators.
+
+CONFLICT IV
+Now mark the conflicts in "index.html" as resolved.
+$ git add index.html
+
+CONFLICT V
+Now that all conflicts have been resolved and those files added, continue the current rebase in process.
+$ git rebase --continue
+
+SHORT HISTORY
+All those e-mail addresses and SHAs are making it hard to see commit messages in your history. Try viewing the log with one commit per line.
+$ git log --pretty=oneline
+
+SHOW CHANGES
+The client called with an urgent question about chew toys, and now you can't remember what you last modified. Bring up a summary of file changes.
+$ git diff
+
+BRANCH CHANGES
+You've finished adding elephants to the catalog. You need to write up a change log for the client, and you want to ensure you don't miss anything. Compare the master branch to your elephant branch to show what's new.
+$ git diff master elephant
+
+ANCESTOR COMMITS
+You rebased your latest commit after a commit from your co-worker, but now the page is rendering strangely. To figure out why, get a diff that includes the previous commit, as well as its parent.
+$ git diff HEAD~2
+
+HISTORY WITH DIFF
+Well, you see the changes, but you're not sure what your co-worker was trying to accomplish. Display the diffs along with the log to determine what's going on.
+$ git log --oneline -p
+
+WHOSE LINE IS IT?
+Wait, what? You don't understand these lines in index.html. You'd better find out who committed them, so you can ask them what they're supposed to do.
+$ git blame index.html --date short
+
+IGNORE FILES
+Your server writes files to the logs directory. You're not going to commit them, but they keep appearing in your git status output, and you'd like them not to. Edit your .gitignore file to ignore all files in the logs/ directory whose names end in .log.
+logs/*.log
+
+CONFIGURATION
+Just for this repo, set the user.email value to admin@example.com.
+$ git config user.email "admin@example.com"
+
+GLOBAL CONFIG
+Set your name as the user.name value for all Git repos.
+$ git config --global user.name "Dima"
+
+ALIAS
+commit just won't suffice for your code. You need a command that conveys the importance of the work that you're entrusting to Git. Alias git commit to git beholdmyamazingcode (or something equally awesome).
+$ git config --global alias.co commit
+
+
+
+
+
+
+
+
+
+
+
+

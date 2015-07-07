@@ -1,0 +1,183 @@
+gem install compass Ц The command used to install Compass
+compass --version Ц Tells us which version of Compass we're running
+
+http://stackoverflow.com/questions/16003621/configuring-compass-on-windows тут и бутстрап есть
+
+compass create project-path/project-name Ц Command used to create a Compass project
+The cd command is used to change directories. For example: cd desktop/my-prj
+compass watch Ц Tells Compass to watch for any saved changes in our project
+
+@include background(linear-gradient(to top, #3d69b5, #1a335e);
+@include rotate(65deg);
+@include transform(translateX(100px) rotate(45deg));
+
+http://compass-style.org/reference/compass/layout/sticky_footer/
+http://compass-style.org/examples/compass/layout/sticky-footer/
+
+@include link-colors(); // дл€ всех состо€ний, возможно меньше 4х значений
+@include link-colors(#3f8abf, $visited: #3ac162);
+
+
+#{ headings(all) } {
+  margin: 1em 0;
+  @include column-span(all);
+}
+
+
+
+@include force-wrap; //принудительный перенос длинного слова, если оно не помещаетс€ в строку
+@include ellipsis; //ставит три точки на конце строки, а все что не помещаетс€ в строку скрывает
+
+
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+@include establish-baseline;
+body {
+  font-family: sans-serif;
+  @include debug vertical-alignment;
+}
+h1 {
+  @include adjust-font-size-to(36px);
+  margin-bottom: rhythm(1, 36px);
+  //@include rhythm(1, 1, 1, 2, 36); = @include rhythm(leader, padding-leader, padding-trailer, trailer, adjusted font size);
+  @include trailing-border(10px, 1, 50px); == (border-width, units of padding, font size-if necessary)
+  @include rhythm-borders(2px, 1, 20px);
+}
+h1 {
+  @include adjust-font-size-to(24px);
+  margin-bottom: rhythm(1, 24px);
+}
+h3 {
+  @include adjust-font-size-to(21px);
+}
+p {
+  // @include leader; //верхний отступ размером в строку
+  @include trailer; //добавл€ет нижний отступ размером в строку
+}
+blockquote {
+ @include adjust-font-size-to(20px)
+ @include adjust-leading-to(2, 20px); //сколько строк будет занимать строка элемента
+ @include trailer(2, 20px);
+}
+
+@import "compass" 
+$base-font-size: 18px 
+$base-line-height: 30px 
++establish-baseline 
+h1   
+  +adjust-font-size-to(50px)   
+  +trailer(2, 50px)  
+  +trailing-border(10px, 1, 50px)
+
+blockquote
+  +adjust-font-size-to(20px)
+  +rhythm-borders(2px, 1, 20px) 
+p   
+  +leader(1)
+  +trailer(1)
+
+
+$base: firebrick;
+$lighten: adjust-lightness($base, 10%);
+
+ColorHelpers: $lighten; adjust-saturation($base, 30%); shade($base, 50%); tint($base, 40%);
+@include background(linear-gradient($base, shade($base, 50%)));
+
+$contrasted-lightness-threshold: 50%;
+@include contrasted($base);
+@include contrasted(shade($base, 8%));
+
+
+URL Helpers: image-url(); font-url(); inline-image(); //в конфиге поставить relative_assets = true
+
+Image Dimension Helpers: image-width($image); image-height($image);
+
+Text Replacement and Inline Images: 
+.logo {
+  display: inline-block;
+  margin-right: .2em;  
+  @include replace-text('th-logo.png'); // замен€ет текст бэкграундом
+  // @include replace-text(inline-image('th-logo.png')); 
+  // @include replace-text-with-dimensions('th-logo.png', $inline: true);
+  width: image-width('th-logo.png');
+}
+
+
+Compass Sprites: 
+Use @import "your-folder-name/*.png"; to import all .png files in your sprite folder and generate a sprite sheet
+Use @include all-<your-sprite-map>-sprites; to create CSS rules for all images inside your sprite folder
+To display hover states, add the new images to your sprites folder ЦЦ with the same file names, and make sure the file names end in _hover.png
+$<your-sprite-map>-sprite-dimensions: true; Ц Outputs the width and height values for each sprite in the CSS
+
+$icons-spacing: 20px;
+$icons-layout: horizontal; // $icons-layout: smart;
+$icons-strite-dimensions: true; //не использовать, нерационально
+@include hide-text;
+
+
+
+Production Stylesheets:
+http_path Ц Sets the path to where our project will be hosted in production.
+http_images_path Ц Sets the full path to our images hosted on a server.
+http_generated_images_path Ц Sets the path to generated sprite sheets hosted on a server.
+environment = :production Ц Forces Compass to use the default configurations for production stylesheets. The CSS output is compressed, and all comments and spaces are removed.
+http_path = "/my-prj"
+http_images_path = "http://my-site.com/img"
+http_generated_images_path = "http://my-site.com/img" //sprites
+environment = :production //сжимает выходной стиль css
+
+
+
+Second syntax.
+
+Compass comprises five main modules: utilities, typography, css3, layout, reset(auto when declarate)
+@import "compass"; //utilities, typography, css3
+@import "layout";
+
+useful css3 module mixins: background(gradients), box-shadow, border-radius, columns, transform, transition.
+
+Colors: color: scale-lightness(#eee, 7%); // use a negative value to darken
+color: scale_color(#a99f88, $saturation: 30%); === color: scale-saturation(#a99f88, 30%);
+
+Opposite-position:
+=caret($point)
+  $opposite: opposite-position($point)
+  border: 100px solid transparent 
+  $opposite: opposite-position($point) 
+  border-#{$opposite}: 100px solid #000 
+  border-#{$point}: 0 height: 0 width: 0
+.caret 
+  +caret(top)
+
+Stretch: +stretch = pos:a top:0 bottom:0 left:0 right:0. +stretch(5px, 5px, 5px, 5px)
+.sidebar
+  background: #be9947
+  +stretch(5px, auto, 5px, 5px)
+  width: 100px
+
+.logo
+  background: inline-image('s.png') //data-uri
+  width: image-width('s.png')
+  height: image-height('s.png')
+
+
+
+Sprites:
+@import "compass"
+@import "icons/*.png"  //файлы с расширением .png в папке icons
++all-icons-sprites //создает спрайт. icons = мо€ папка с иконками icons
+Ћучше делать так:
+@import "compass"
+$icons sprite-map("icons/*.png") //не создает спрайт, только лишь записывает в переменную
+i
+  background: $icons
+  display: inline-block
+@each $i in sprite_names($icons)
+  .icn-#{$i}
+    background-position: sprite-position($icons, $i)
+    +sprite-dimensions($icons, $i)
+  
+
+
+
